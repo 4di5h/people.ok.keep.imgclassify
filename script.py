@@ -1,24 +1,21 @@
 import os
 import shutil
 import cv2
-import dlib
+import face_recognition
 
-# Load pre-trained face detection model
-detector = dlib.get_frontal_face_detector()
-
-
+# Function to check if a face is present in the image
 def is_face(image_path):
-    # Read the image
-    img = cv2.imread(image_path)
+    # Load the image
+    img = face_recognition.load_image_file(image_path)
 
-    # Convert to grayscale for face detection
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # Resize the image for efficiency
+    small_img = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
 
-    # Detect faces in the image
-    faces = detector(gray)
+    # Find all face locations in the image
+    face_locations = face_recognition.face_locations(small_img)
 
     # Check if a face is detected
-    if faces:
+    if face_locations:
         print(f"Face detected in {image_path}")
         return True
     else:
@@ -26,7 +23,7 @@ def is_face(image_path):
         return False
 
 # Specify the path to your album
-album_path = '/PATH/'
+album_path = 'C:/Users/bigti/Desktop/Kashmir Pics'
 
 # Print list of images
 print("List of images:", os.listdir(album_path))
