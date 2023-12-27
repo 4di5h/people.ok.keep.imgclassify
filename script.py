@@ -6,6 +6,7 @@ import dlib
 # Load pre-trained face detection model
 detector = dlib.get_frontal_face_detector()
 
+
 def is_face(image_path):
     # Read the image
     img = cv2.imread(image_path)
@@ -24,9 +25,8 @@ def is_face(image_path):
         print(f"No face detected in {image_path}")
         return False
 
-
 # Specify the path to your album
-album_path = 'C:/Users/bigti/Desktop/Kashmir Pics'
+album_path = '/PATH/'
 
 # Print list of images
 print("List of images:", os.listdir(album_path))
